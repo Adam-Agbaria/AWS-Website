@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing dependencies"
+      - yum install -y gcc openssl-devel bzip2-devel libffi-devel
+      - cd /usr/src
+      - wget https://www.python.org/ftp/python/3.11.0/Python-3.11.0.tgz
+      - tar xzf Python-3.11.0.tgz
+      - cd Python-3.11.0
+      - ./configure --enable-optimizations
+      - make altinstall
+      - ln -s /usr/local/bin/python3.11 /usr/bin/python3.11  # Ensure Python 3.11 is on the PATH
+  pre_build:
+    commands:
+      - echo "Running pre-build phase"
+      - python3.11 --version  # Verifying that Python 3.11 is installed correctly
+  build:
+    commands:
+      - echo "Building the SAM application"
+      - sam build
+  post_build:
+    commands:
+      - echo "Deploying the resume website to S3"
+      - aws s3 sync src/website s3://adam-agbaria --delete
+
+artifacts:
+  files:
+    - '**/*'
