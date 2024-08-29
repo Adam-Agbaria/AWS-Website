@@ -25,9 +25,11 @@ phases:
       - echo "Deploying the resume website to S3"
       - aws s3 sync src/website s3://adam-agbaria --delete
       - echo "Triggering the build_function Lambda"
-      - aws lambda invoke --function-name build_function --payload '{"project_name": "ResumeWebsite", "s3_bucket": "adam-agbaria"}' /tmp/lambda_output.txt
+      - >
+        aws lambda invoke --function-name build_function --payload '{\"project_name\": \"ResumeWebsite\", \"s3_bucket\": \"adam-agbaria\"}' /tmp/lambda_output.txt
       - echo "Sending deployment notification"
-      - aws lambda invoke --function-name notifications --payload '{"topic_arn": "your-sns-topic-arn", "message": "Resume Website Deployed Successfully"}' /tmp/notify_output.txt
+      - >
+        aws lambda invoke --function-name notifications --payload '{\"topic_arn\": \"your-sns-topic-arn\", \"message\": \"Resume Website Deployed Successfully\"}' /tmp/notify_output.txt
 
 artifacts:
   files:
