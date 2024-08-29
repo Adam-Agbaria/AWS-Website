@@ -7,7 +7,7 @@ Resources:
   PipelineConfigTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: PipelineConfig
+      TableName: PipelineConfigTable
       AttributeDefinitions:
         - AttributeName: pipeline_id
           AttributeType: S
