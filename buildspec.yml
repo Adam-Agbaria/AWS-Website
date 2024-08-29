@@ -31,13 +31,13 @@ phases:
       - ls -la src/website  
       - aws s3 sync src/website s3://adam-agbaria --delete
       - echo "Checking CloudFormation stack status"
-      - >
+      - |
         STACK_STATUS=$(aws cloudformation describe-stacks --stack-name ResumeWebsiteStack --query 'Stacks[0].StackStatus' --output text)
-      - if [[ "$STACK_STATUS" == "ROLLBACK_FAILED" ]]; then
-          echo "Stack is in ROLLBACK_FAILED state. Deleting stack...";
-          aws cloudformation delete-stack --stack-name ResumeWebsiteStack;
-          echo "Waiting for stack to be deleted...";
-          aws cloudformation wait stack-delete-complete --stack-name ResumeWebsiteStack;
+        if [ "$STACK_STATUS" = "ROLLBACK_FAILED" ]; then
+          echo "Stack is in ROLLBACK_FAILED state. Deleting stack..."
+          aws cloudformation delete-stack --stack-name ResumeWebsiteStack
+          echo "Waiting for stack to be deleted..."
+          aws cloudformation wait stack-delete-complete --stack-name ResumeWebsiteStack
         fi
       - echo "Checking if the build_function exists"
       - if ! aws lambda get-function --function-name build_function; then
