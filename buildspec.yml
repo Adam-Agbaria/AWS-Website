@@ -32,17 +32,17 @@ phases:
       - aws s3 sync src/website s3://adam-agbaria --delete
       - echo "Checking CloudFormation stack status"
       - >
-        STACK_EXISTS=$(aws cloudformation describe-stacks --stack-name ResumeWebsiteStack --query 'Stacks[0].StackStatus' --output text 2>&1 || true)
+        STACK_STATUS=$(aws cloudformation describe-stacks --stack-name ResumeWebsiteStack --query 'Stacks[0].StackStatus' --output text 2>&1 || true)
       - >
-        if [ "$STACK_STATUS" = "ROLLBACK_FAILED" ] || [ "$STACK_STATUS" = "DELETE_FAILED" ] || [ "$STACK_STATUS" = "ROLLBACK_COMPLETE" ]; then
+        if [[ "$STACK_STATUS" == "ROLLBACK_FAILED" ]] || [[ "$STACK_STATUS" == "DELETE_FAILED" ]] || [[ "$STACK_STATUS" == "ROLLBACK_COMPLETE" ]]; then
           echo "Stack is in $STACK_STATUS state. Deleting stack...";
           aws cloudformation delete-stack --stack-name ResumeWebsiteStack;
           echo "Waiting for stack to be deleted...";
           aws cloudformation wait stack-delete-complete --stack-name ResumeWebsiteStack;
-        elif [[ "$STACK_EXISTS" == *"does not exist"* ]]; then
+        elif [[ "$STACK_STATUS" == *"does not exist"* ]]; then
           echo "Stack does not exist. Proceeding with deployment.";
         else
-          echo "Stack exists and is in status: $STACK_EXISTS";
+          echo "Stack exists and is in status: $STACK_STATUS";
         fi
       - echo "Checking if the build_function exists"
       - if ! aws lambda get-function --function-name build_function; then
