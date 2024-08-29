@@ -33,8 +33,8 @@ phases:
       - echo "Checking CloudFormation stack status"
       - |
         STACK_STATUS=$(aws cloudformation describe-stacks --stack-name ResumeWebsiteStack --query 'Stacks[0].StackStatus' --output text)
-        if [ "$STACK_STATUS" = "ROLLBACK_FAILED" ]; then
-          echo "Stack is in ROLLBACK_FAILED state. Deleting stack..."
+        if [ "$STACK_STATUS" = "ROLLBACK_FAILED" ] || [ "$STACK_STATUS" = "DELETE_FAILED" ]; then
+          echo "Stack is in $STACK_STATUS state. Deleting stack..."
           aws cloudformation delete-stack --stack-name ResumeWebsiteStack
           echo "Waiting for stack to be deleted..."
           aws cloudformation wait stack-delete-complete --stack-name ResumeWebsiteStack
