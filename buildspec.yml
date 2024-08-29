@@ -31,10 +31,9 @@ phases:
       - ls -la src/website  
       - aws s3 sync src/website s3://adam-agbaria --delete
       - echo "Checking if build_function exists"
-      - >
-        if ! aws lambda get-function --function-name build_function; then
+      - if ! aws lambda get-function --function-name build_function; then
           echo "build_function does not exist. Deploying function...";
-          sam deploy --template-file template.yaml --stack-name ResumeWebsiteStack --capabilities CAPABILITY_IAM;
+          sam deploy --template-file template.yaml --stack-name ResumeWebsiteStack --capabilities CAPABILITY_IAM --s3-bucket adam-agbaria;
         else
           echo "build_function exists. Proceeding with deployment.";
         fi
