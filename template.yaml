@@ -22,7 +22,7 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.11
       CodeUri: src/build_function/
-      Role: !GetAtt BuildFunctionRole.Arn
+      Role: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       Events:
         ApiEvent:
           Type: Api
@@ -30,16 +30,13 @@ Resources:
             Path: /build
             Method: post
 
-
-
-
   DeployFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: app.lambda_handler
       Runtime: python3.11
       CodeUri: src/deploy_function/
-      Role: !GetAtt DeployFunctionRole.Arn
+      Role: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       Events:
         ApiEvent:
           Type: Api
@@ -47,14 +44,13 @@ Resources:
             Path: /deploy
             Method: post
 
- 
   NotificationFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: app.lambda_handler
       Runtime: python3.11
       CodeUri: src/notifications/
-      Role: !GetAtt NotificationFunctionRole.Arn
+      Role: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       Events:
         ApiEvent:
           Type: Api
@@ -62,20 +58,16 @@ Resources:
             Path: /notify
             Method: post
 
-  
-
   PipelineManagerFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: app.lambda_handler
       Runtime: python3.11
       CodeUri: src/pipeline_manager/
-      Role: !GetAtt PipelineManagerFunctionRole.Arn
+      Role: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       Events:
         ApiEvent:
           Type: Api
           Properties:
             Path: /pipeline
             Method: post
-
-  
