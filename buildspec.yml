@@ -28,6 +28,7 @@ phases:
   post_build:
     commands:
       - echo "Deploying the resume website to S3"
+      - ls -la src/website  
       - aws s3 sync src/website s3://adam-agbaria --delete
       - echo "Triggering the build_function Lambda"
       - >
