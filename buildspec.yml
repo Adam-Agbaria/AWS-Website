@@ -30,9 +30,13 @@ phases:
       - echo "Checking CloudFormation stack status"
       - |
         STACK_STATUS=$(aws cloudformation describe-stacks --stack-name ResumeWebsiteStack --query 'Stacks[0].StackStatus' --output text)
-        if [ "$STACK_STATUS" = "ROLLBACK_FAILED" ] || [ "$STACK_STATUS" = "DELETE_FAILED" ]; then
-          echo "Stack is in $STACK_STATUS state. Skipping deletion...";
-          aws cloudformation delete-stack --stack-name ResumeWebsiteStack || echo "Failed to delete stack, proceeding with deployment."
+      - if [ "$STACK_STATUS" = "ROLLBACK_FAILED" ] || [ "$STACK_STATUS" = "DELETE_FAILED" ]; then
+          echo "Stack is in $STACK_STATUS state. Attempting forceful deletion...";
+          aws cloudformation delete-stack --stack-name ResumeWebsiteStack;
+          echo "Attempting forceful resource deletion...";
+          aws cloudformation delete-stack --stack-name ResumeWebsiteStack --retain-resources "[\"*\"]"; # This line attempts to force deletion
+          echo "Waiting for stack to be deleted...";
+          aws cloudformation wait stack-delete-complete --stack-name ResumeWebsiteStack;
         fi
       - echo "Checking if the build_function exists"
       - if ! aws lambda get-function --function-name build_function; then
