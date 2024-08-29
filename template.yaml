@@ -64,7 +64,7 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.11
       CodeUri: src/pipeline_manager/
-      Role: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Role: arn:aws:iam::537124961939:role/Adam
       Events:
         ApiEvent:
           Type: Api
