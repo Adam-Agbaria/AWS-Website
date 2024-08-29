@@ -127,42 +127,6 @@ Resources:
                   - sns:Publish
                 Resource: "*"  
 
-  TriggerPipelineFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: app.lambda_handler
-      Runtime: python3.11
-      CodeUri: src/trigger_pipeline/
-      Role: !GetAtt TriggerPipelineFunctionRole.Arn
-      Events:
-        ApiEvent:
-          Type: Api
-          Properties:
-            Path: /trigger
-            Method: post
-
-  TriggerPipelineFunctionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: lambda.amazonaws.com
-            Action: sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-      Policies:
-        - PolicyName: TriggerPipelineFunctionPolicy
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-              - Effect: Allow
-                Action:
-                  - codepipeline:StartPipelineExecution
-                Resource: "*" 
-
   PipelineManagerFunction:
     Type: AWS::Serverless::Function
     Properties:
