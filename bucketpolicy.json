@@ -11,8 +11,8 @@
         ],
         "Effect": "Allow",
         "Resource": [
-          "arn:aws:s3:::my-server-deployment-bucket-proj",
-          "arn:aws:s3:::my-server-deployment-bucket-proj/*"
+          "arn:aws:s3:::<bucketName>",
+          "arn:aws:s3:::<bucketName>/*"
         ],
         "Principal": {
           "AWS": [
