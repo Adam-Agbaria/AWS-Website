@@ -11,11 +11,11 @@ phases:
       - cd Python-3.11.0
       - ./configure --enable-optimizations
       - make altinstall
-      - ln -s /usr/local/bin/python3.11 /usr/bin/python3.11  # Ensure Python 3.11 is on the PATH
+      - ln -s /usr/local/bin/python3.11 /usr/bin/python3.11 
   pre_build:
     commands:
       - echo "Running pre-build phase"
-      - python3.11 --version  # Verifying that Python 3.11 is installed correctly
+      - python3.11 --version  
   build:
     commands:
       - echo "Building the SAM application"
@@ -24,6 +24,10 @@ phases:
     commands:
       - echo "Deploying the resume website to S3"
       - aws s3 sync src/website s3://adam-agbaria --delete
+      - echo "Triggering the build_function Lambda"
+      - aws lambda invoke --function-name build_function --payload '{"project_name": "ResumeWebsite", "s3_bucket": "adam-agbaria"}' /tmp/lambda_output.txt
+      - echo "Sending deployment notification"
+      - aws lambda invoke --function-name notifications --payload '{"topic_arn": "your-sns-topic-arn", "message": "Resume Website Deployed Successfully"}' /tmp/notify_output.txt
 
 artifacts:
   files:
