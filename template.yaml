@@ -22,7 +22,7 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.11
       CodeUri: src/build_function/
-      Role: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Role: arn:aws:iam::537124961939:role/Adam
       Events:
         ApiEvent:
           Type: Api
@@ -36,7 +36,7 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.11
       CodeUri: src/deploy_function/
-      Role: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Role: arn:aws:iam::537124961939:role/Adam
       Events:
         ApiEvent:
           Type: Api
@@ -50,7 +50,7 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.11
       CodeUri: src/notifications/
-      Role: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Role: arn:aws:iam::537124961939:role/Adam
       Events:
         ApiEvent:
           Type: Api
