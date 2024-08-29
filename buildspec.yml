@@ -27,17 +27,22 @@ phases:
       - sam build --template-file template.yaml  
   post_build:
     commands:
+      - echo "Deploying the resume website to S3"
+      - ls -la src/website  
+      - aws s3 sync src/website s3://adam-agbaria --delete
       - echo "Checking CloudFormation stack status"
-      - |
-        STACK_STATUS=$(aws cloudformation describe-stacks --stack-name ResumeWebsiteStack --query 'Stacks[0].StackStatus' --output text)
-      - if [ "$STACK_STATUS" = "ROLLBACK_FAILED" ] || [ "$STACK_STATUS" = "DELETE_FAILED" ]; then
-          echo "Stack is in $STACK_STATUS state. Attempting forceful deletion...";
+      - >
+        STACK_EXISTS=$(aws cloudformation describe-stacks --stack-name ResumeWebsiteStack --query 'Stacks[0].StackStatus' --output text 2>&1 || true)
+      - >
+        if [[ "$STACK_EXISTS" == "DELETE_FAILED" ]] || [[ "$STACK_EXISTS" == "ROLLBACK_FAILED" ]]; then
+          echo "Stack is in $STACK_EXISTS state. Attempting forceful deletion...";
           aws cloudformation delete-stack --stack-name ResumeWebsiteStack;
           echo "Waiting for stack to be deleted...";
           aws cloudformation wait stack-delete-complete --stack-name ResumeWebsiteStack;
-          echo "Stack deletion process complete.";
+        elif [[ "$STACK_EXISTS" == *"does not exist"* ]]; then
+          echo "Stack does not exist. Proceeding with deployment.";
         else
-          echo "No need to delete the stack.";
+          echo "Stack exists and is in status: $STACK_EXISTS";
         fi
       - echo "Checking if the build_function exists"
       - if ! aws lambda get-function --function-name build_function; then
@@ -52,7 +57,6 @@ phases:
       - echo "Sending deployment notification"
       - >
         aws lambda invoke --function-name notifications --payload '{"topic_arn": "your-sns-topic-arn", "message": "Resume Website Deployed Successfully"}' /tmp/notify_output.txt
-
 
 artifacts:
   files:
