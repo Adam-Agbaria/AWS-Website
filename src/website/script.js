@@ -191,7 +191,6 @@ document.addEventListener('DOMContentLoaded', function () {
     } else{
         const maxVisibleProjects = 6; 
     }
-    const maxVisibleProjects = 3; 
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
