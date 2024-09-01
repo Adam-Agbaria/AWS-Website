@@ -602,6 +602,14 @@ footer {
 
 /* Media query for mobile devices */
 @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
+        #background-video {
+            object-fit: cover;
+            object-position: center; /* Center the video content */
+            width: 100%;
+            height: 100vh; /* Ensure it covers the full height of the viewport */
+        }
+    }    
     #projects {
         padding: 1px 0 1px 0;
     }
