@@ -1,4 +1,53 @@
 document.addEventListener('DOMContentLoaded', function () {
+    
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        console.log('Mobile device detected');
+    
+        // Adjust font sizes for the hero section on mobile
+        document.querySelector('.hero-title').style.fontSize = '48px';
+        document.querySelector('.hero-subtitle').style.fontSize = '24px';
+        document.querySelector('.hero-description').style.fontSize = '16px';
+    
+        // Adjust the navigation bar layout for mobile
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.textAlign = 'center';
+        navLinks.style.paddingTop = '20px'; // Add some padding to the top for spacing
+        
+        // Adjust each navigation link for mobile
+        document.querySelectorAll('.nav-links li').forEach(li => {
+            li.style.marginBottom = '10px';
+            li.style.marginLeft = '0'; // Reset any left margin
+        });
+    
+        // Adjust hero button to be full-width on mobile
+        document.querySelector('.hero-button').style.width = '100%';
+        document.querySelector('.hero-button').style.padding = '10px 0';
+    
+        // Adjust project grid to display items in a single column on mobile
+        const projectGrid = document.querySelector('.project-grid');
+        projectGrid.style.gridTemplateColumns = '1fr'; // Single column for projects
+        projectGrid.style.gap = '20px'; // Adjust the gap between project cards
+    
+        // Adjust contact section buttons to be full-width on mobile
+        const contactButtons = document.querySelectorAll('.contact-links .button');
+        contactButtons.forEach(button => {
+            button.style.width = '100%';
+            button.style.padding = '10px 0';
+            button.style.marginBottom = '10px'; // Add space between buttons
+        });
+    
+        // Ensure video backgrounds fill the screen properly on mobile
+        const videos = document.querySelectorAll('.section-with-video video');
+        videos.forEach(video => {
+            video.style.objectFit = 'cover'; // Make sure the video covers the entire section
+        });
+    
+        // Add additional styles or modifications specific to mobile as needed
+    }
+    
     // Smooth scroll for internal links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
