@@ -54,10 +54,12 @@ phases:
         else
           echo "$BUILD_FUNCTION_NAME exists. Proceeding with deployment.";
         fi
-      - echo "Invoking the Lambda function: $BUILD_FUNCTION_NAME"
+      - >
+        echo "Invoking the Lambda function: $BUILD_FUNCTION_NAME"
       - >
         aws lambda invoke --function-name $BUILD_FUNCTION_NAME --payload '{"project_name": "ResumeWebsite", "s3_bucket": "adam-agbaria"}' /tmp/lambda_output.txt --cli-binary-format raw-in-base64-out
-      - echo "Invoking the Notification Lambda function: $NOTIFICATION_FUNCTION_NAME"
+      - >
+        echo "Invoking the Notification Lambda function: $NOTIFICATION_FUNCTION_NAME"
       - >
         aws lambda invoke --function-name $NOTIFICATION_FUNCTION_NAME --payload '{"topic_arn": "your-sns-topic-arn", "message": "Resume Website Deployed Successfully"}' /tmp/notify_output.txt --cli-binary-format raw-in-base64-out
 
