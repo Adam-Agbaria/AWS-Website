@@ -13,15 +13,17 @@ document.addEventListener('DOMContentLoaded', function () {
             element.style.fontSize = '14px'; // Reduce paragraph and list sizes
         });
     
-        // Adjust the navigation bar layout for mobile to fit all items side by side
+        // Adjust the navigation bar layout for mobile to fit all items in two rows
         const navLinks = document.querySelector('.nav-links');
-        navLinks.style.flexDirection = 'row'; // Keep them in a row
-        navLinks.style.flexWrap = 'wrap'; // Allow wrapping if needed
+        navLinks.style.flexDirection = 'row';
+        navLinks.style.flexWrap = 'wrap'; // Allow wrapping
         navLinks.style.justifyContent = 'space-between'; // Distribute them evenly
+        navLinks.style.height = 'auto'; // Adjust the height to accommodate two rows
     
         // Reduce the font size of the navbar links
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.style.fontSize = '12px'; // Reduce the font size to fit
+            link.style.fontSize = '14px'; // Reduce the font size to fit better
+            link.style.padding = '5px'; // Reduce padding to ensure better fit
         });
     
         // Adjust the hero section text size for mobile
@@ -29,12 +31,19 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.hero-subtitle').style.fontSize = '20px';
         document.querySelector('.hero-description').style.fontSize = '16px';
     
+        // Reduce the space between sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.paddingTop = '10px';
+            section.style.paddingBottom = '10px';
+        });
+    
         // Adjust the project grid to display items one above the other on mobile
         const projectGrid = document.querySelector('.project-grid');
         projectGrid.style.gridTemplateColumns = '1fr'; // Single column for projects
     
-        // Adjust the size of project cards to be smaller on mobile
+        // Change the color of the project cards
         document.querySelectorAll('.project-card').forEach(card => {
+            card.style.backgroundColor = '#434343b3'; // Change to a darker color
             card.style.padding = '10px';
             card.style.fontSize = '12px'; // Further reduce text size in project cards
         });
@@ -42,9 +51,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Adjust the contact section buttons to be smaller and fit side by side on mobile
         const contactButtons = document.querySelectorAll('.contact-links .button');
         contactButtons.forEach(button => {
-            button.style.width = '45%';
+            button.style.width = '48%'; // Make buttons fit side by side
             button.style.padding = '8px 0'; // Reduce padding
             button.style.margin = '5px'; // Add some margin for spacing
+            button.style.display = 'inline-block'; // Ensure inline display
         });
     
         // Reduce the font size of the footer text
@@ -67,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
         scrollIndicator.style.width = '20px';
         scrollIndicator.style.height = '40px';
     }
+    
     
     
     // Smooth scroll for internal links
