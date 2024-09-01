@@ -30,7 +30,7 @@ phases:
       - echo "Deploying the resume website to S3"
       - ls -la src/website  
       - aws s3 sync src/website s3://adam-agbaria --delete
-      - echo "Checking CloudFormation stack status"
+      - echo "Checking CloudFormation stack status..."
       - >
         STACK_STATUS=$(aws cloudformation describe-stacks --stack-name ResumeWebsiteStack --query 'Stacks[0].StackStatus' --output text 2>&1 || true)
       - >
