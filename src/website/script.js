@@ -13,28 +13,31 @@ document.addEventListener('DOMContentLoaded', function () {
             element.style.fontSize = '14px'; // Reduce paragraph and list sizes
         });
     
-        // Adjust the navigation bar layout for mobile to fit all items in two rows
+        // Adjust the navigation bar layout for mobile to fit items in two rows
         const navLinks = document.querySelector('.nav-links');
         navLinks.style.flexDirection = 'row';
-        navLinks.style.flexWrap = 'wrap'; // Allow wrapping
-        navLinks.style.justifyContent = 'space-between'; // Distribute them evenly
-        navLinks.style.height = 'auto'; // Adjust the height to accommodate two rows
+        navLinks.style.flexWrap = 'wrap'; // Allow wrapping to create two rows
+        navLinks.style.justifyContent = 'space-around'; // Evenly distribute items
     
-        // Reduce the font size of the navbar links
+        // Adjust the font size and spacing of the navbar links
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.style.fontSize = '14px'; // Reduce the font size to fit better
-            link.style.padding = '5px'; // Reduce padding to ensure better fit
+            link.style.fontSize = '14px'; // Smaller font size
+            link.style.flex = '1 0 30%'; // Flex items to take up a third of the space each
+            link.style.textAlign = 'center'; // Center text
         });
-    
-        // Adjust the hero section text size for mobile
-        document.querySelector('.hero-title').style.fontSize = '48px';
-        document.querySelector('.hero-subtitle').style.fontSize = '20px';
-        document.querySelector('.hero-description').style.fontSize = '16px';
     
         // Reduce the space between sections
         document.querySelectorAll('section').forEach(section => {
             section.style.paddingTop = '10px';
             section.style.paddingBottom = '10px';
+        });
+    
+        // Display only the top 3 project cards, hide the rest
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach((card, index) => {
+            if (index >= 3) {
+                card.style.display = 'none'; // Hide cards after the top 3
+            }
         });
     
         // Adjust the project grid to display items one above the other on mobile
@@ -43,18 +46,24 @@ document.addEventListener('DOMContentLoaded', function () {
     
         // Change the color of the project cards
         document.querySelectorAll('.project-card').forEach(card => {
-            card.style.backgroundColor = '#434343b3'; // Change to a darker color
+            card.style.backgroundColor = '#434343b3'; // Change to a dark gray color
             card.style.padding = '10px';
             card.style.fontSize = '12px'; // Further reduce text size in project cards
         });
     
-        // Adjust the contact section buttons to be smaller and fit side by side on mobile
+        // Left-align text in the Skills section
+        document.querySelectorAll('#skills p, #skills ul').forEach(element => {
+            element.style.textAlign = 'left'; // Left-align text in the Skills section
+        });
+    
+        // Adjust the contact section buttons to fit side by side
         const contactButtons = document.querySelectorAll('.contact-links .button');
         contactButtons.forEach(button => {
-            button.style.width = '48%'; // Make buttons fit side by side
+            button.style.width = '45%'; // Make buttons fit side by side
             button.style.padding = '8px 0'; // Reduce padding
             button.style.margin = '5px'; // Add some margin for spacing
             button.style.display = 'inline-block'; // Ensure inline display
+            button.style.fontSize = '12px'; // Reduce text size inside buttons
         });
     
         // Reduce the font size of the footer text
@@ -76,7 +85,18 @@ document.addEventListener('DOMContentLoaded', function () {
         const scrollIndicator = document.querySelector('.scroll-indicator span');
         scrollIndicator.style.width = '20px';
         scrollIndicator.style.height = '40px';
+    
+        // Change the color of the filter buttons
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.style.backgroundColor = '#434343b3'; // Dark gray color for the filter buttons
+            button.style.color = '#fff'; // White text color
+            button.style.border = 'none'; // Remove any borders
+            button.style.padding = '8px'; // Adjust padding
+            button.style.fontSize = '12px'; // Reduce font size
+        });
     }
+    
     
     
     
