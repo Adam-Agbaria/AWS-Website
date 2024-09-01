@@ -13,21 +13,15 @@ document.addEventListener('DOMContentLoaded', function () {
             element.style.fontSize = '14px'; // Reduce paragraph and list sizes
         });
     
-        // Adjust the navigation bar layout for mobile to fit all items
+        // Adjust the navigation bar layout for mobile to fit all items side by side
         const navLinks = document.querySelector('.nav-links');
-        navLinks.style.flexDirection = 'column';
-        navLinks.style.textAlign = 'center';
-        navLinks.style.paddingTop = '20px'; // Add some padding to the top for spacing
-        
-        // Adjust each navigation link for mobile
-        document.querySelectorAll('.nav-links li').forEach(li => {
-            li.style.marginBottom = '10px';
-            li.style.marginLeft = '0'; // Reset any left margin
-        });
+        navLinks.style.flexDirection = 'row'; // Keep them in a row
+        navLinks.style.flexWrap = 'wrap'; // Allow wrapping if needed
+        navLinks.style.justifyContent = 'space-between'; // Distribute them evenly
     
         // Reduce the font size of the navbar links
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.style.fontSize = '16px';
+            link.style.fontSize = '12px'; // Reduce the font size to fit
         });
     
         // Adjust the hero section text size for mobile
@@ -35,14 +29,14 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.hero-subtitle').style.fontSize = '20px';
         document.querySelector('.hero-description').style.fontSize = '16px';
     
-        // Adjust the project grid to display 3 items per row on mobile
+        // Adjust the project grid to display items one above the other on mobile
         const projectGrid = document.querySelector('.project-grid');
-        projectGrid.style.gridTemplateColumns = 'repeat(3, 1fr)'; // Force 3 items per row
+        projectGrid.style.gridTemplateColumns = '1fr'; // Single column for projects
     
         // Adjust the size of project cards to be smaller on mobile
         document.querySelectorAll('.project-card').forEach(card => {
             card.style.padding = '10px';
-            card.style.fontSize = '14px'; // Reduce text size in project cards
+            card.style.fontSize = '12px'; // Further reduce text size in project cards
         });
     
         // Adjust the contact section buttons to be smaller and fit side by side on mobile
@@ -73,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
         scrollIndicator.style.width = '20px';
         scrollIndicator.style.height = '40px';
     }
+    
     
     // Smooth scroll for internal links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
