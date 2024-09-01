@@ -44,7 +44,7 @@ phases:
         else
           echo "Stack exists and is in status: $STACK_STATUS";
         fi
-      - echo "Retrieving the latest Lambda function names"
+      - echo "Retrieving the latest Lambda function names..."
       - BUILD_FUNCTION_NAME=$(aws cloudformation describe-stack-resource --stack-name ResumeWebsiteStack --logical-resource-id BuildFunction --query 'StackResourceDetail.PhysicalResourceId' --output text)
       - NOTIFICATION_FUNCTION_NAME=$(aws cloudformation describe-stack-resource --stack-name ResumeWebsiteStack --logical-resource-id NotificationFunction --query 'StackResourceDetail.PhysicalResourceId' --output text)
       - echo "Checking if $BUILD_FUNCTION_NAME exists"
