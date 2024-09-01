@@ -186,12 +186,13 @@ document.addEventListener('DOMContentLoaded', function () {
     let hiddenProjects = document.querySelectorAll('.hidden');
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    if(isMobile){
-        const maxVisibleProjects = 3; 
-    } else{
-        const maxVisibleProjects = 6; 
-    }
-
+    // if(isMobile){
+    //     const maxVisibleProjects = 3; 
+    // } else{
+    //     const maxVisibleProjects = 6; 
+    // }
+    
+    const maxVisibleProjects = 3; 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             const filter = button.getAttribute('data-filter');
