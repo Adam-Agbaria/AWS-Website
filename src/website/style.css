@@ -599,3 +599,19 @@ footer {
 .slide-up {
     animation: slideUp 1.5s ease-in-out;
 }
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 768px) {
+    #projects {
+        padding: 1px 0 1px 0;
+    }
+    #skills{
+        padding: 1px 0 1px 0;
+    }
+    #about{
+        padding: 1px 0 1px 0; 
+    }
+    #footer{
+        padding: 1px 0 1px 0; 
+    }
+}
