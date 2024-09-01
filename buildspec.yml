@@ -53,10 +53,10 @@ phases:
         fi
       - echo "Triggering the ResumeWebsiteStack-BuildFunction-BwaOIN7xUnm6 Lambda"
       - >
-        aws lambda invoke --function-name ResumeWebsiteStack-BuildFunction-BwaOIN7xUnm6 --payload '{"project_name": "ResumeWebsite", "s3_bucket": "adam-agbaria"}' /tmp/lambda_output.txt
+        aws lambda invoke --function-name ResumeWebsiteStack-BuildFunction-BwaOIN7xUnm6 --payload '{"project_name": "ResumeWebsite", "s3_bucket": "adam-agbaria"}' /tmp/lambda_output.txt --cli-binary-format raw-in-base64-out
       - echo "Sending deployment notification"
       - >
-        aws lambda invoke --function-name ResumeWebsiteStack-NotificationFunction-OOttnnArXGOF --payload '{"topic_arn": "your-sns-topic-arn", "message": "Resume Website Deployed Successfully"}' /tmp/notify_output.txt
+        aws lambda invoke --function-name ResumeWebsiteStack-NotificationFunction-OOttnnArXGOF --payload '{"topic_arn": "your-sns-topic-arn", "message": "Resume Website Deployed Successfully"}' /tmp/notify_output.txt --cli-binary-format raw-in-base64-out
 
 artifacts:
   files:
