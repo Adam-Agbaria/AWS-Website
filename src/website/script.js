@@ -184,6 +184,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const loadMoreBtn = document.querySelector('.load-more-btn');
 
     let hiddenProjects = document.querySelectorAll('.hidden');
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if(isMobile){
+        const maxVisibleProjects = 3; 
+    } else{
+        const maxVisibleProjects = 6; 
+    }
     const maxVisibleProjects = 3; 
 
     filterButtons.forEach(button => {
