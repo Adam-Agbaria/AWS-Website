@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
         // Reduce the space between sections
         document.querySelectorAll('section').forEach(section => {
-            section.style.paddingTop = '10px';
-            section.style.paddingBottom = '10px';
+            section.style.paddingTop = '2px';
+            section.style.paddingBottom = '2px';
         });
     
         // Display only the top 3 project cards, hide the rest
@@ -65,16 +65,18 @@ document.addEventListener('DOMContentLoaded', function () {
             button.style.display = 'inline-block'; // Ensure inline display
             button.style.fontSize = '12px'; // Reduce text size inside buttons
         });
+
+        
     
         // Reduce the font size of the footer text
         document.querySelector('footer').style.fontSize = '14px';
-    
-        // Adjust video backgrounds for mobile
-        const videos = document.querySelectorAll('.section-with-video video');
+
+        // Adjust video backgrounds for mobile and ensure playsinline for iOS
         videos.forEach(video => {
             video.style.objectFit = 'cover'; // Make sure the video covers the entire section
+            video.setAttribute('playsinline', 'true'); // Ensure inline playback on iOS
         });
-    
+
         // Reduce the size of social icons in the hero section
         const socialIcons = document.querySelectorAll('.social-icons a');
         socialIcons.forEach(icon => {
@@ -182,13 +184,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const loadMoreBtn = document.querySelector('.load-more-btn');
 
     let hiddenProjects = document.querySelectorAll('.hidden');
+    const maxVisibleProjects = 3; 
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             const filter = button.getAttribute('data-filter');
 
-            filterItems.forEach(item => {
-                if ((filter === 'all' && !item.classList.contains('hidden')) || item.classList.contains(filter)) {
+            filterItems.forEach((item, index) => {
+                if (filter === 'all') {
+                    if (index < maxVisibleProjects && !item.classList.contains('hidden')) {
+                        item.style.display = 'block'; // Show only the top 3 visible projects
+                    } else {
+                        item.style.display = 'none'; // Hide all other projects
+                    }
+                } else if (item.classList.contains(filter)) {
                     item.style.display = 'block';
                 } else {
                     item.style.display = 'none';
@@ -197,9 +206,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // If 'All' filter is selected, reset the Load More button and re-hide hidden projects
             if (filter === 'all') {
-                hiddenProjects.forEach(project => {
-                    project.classList.add('hidden');
-                    project.style.display = 'none'; // Hide hidden projects again
+                hiddenProjects.forEach((project, index) => {
+                    if (index >= maxVisibleProjects) {
+                        project.classList.add('hidden');
+                        project.style.display = 'none'; // Hide projects again
+                    }
                 });
                 loadMoreBtn.style.display = 'inline-block'; // Show the Load More button
             } else {
@@ -220,6 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initial state - Show the Load More button
     loadMoreBtn.style.display = 'inline-block';
 });
+
 document.addEventListener('DOMContentLoaded', function () {
     // Typing Animation for Hero Section
     const typedText = document.querySelector('.typed-text');
