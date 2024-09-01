@@ -604,11 +604,14 @@ footer {
 @media only screen and (max-width: 768px) {
     @media only screen and (max-width: 768px) {
         #background-video {
-            object-fit: cover;
-            object-position: center; /* Center the video content */
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 100vh; /* Ensure it covers the full height of the viewport */
-        }
+            height: 100%;
+            object-fit: fill; 
+            z-index: -1;
+        }        
     }    
     #projects {
         padding: 1px 0 1px 0;
