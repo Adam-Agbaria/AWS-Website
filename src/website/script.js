@@ -1,5 +1,78 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+    if (isMobile) {
+        console.log('Mobile device detected');
+    
+        // Adjust the font sizes for all sections to be smaller on mobile
+        document.querySelectorAll('h1, h2').forEach(element => {
+            element.style.fontSize = '24px'; // Reduce header sizes
+        });
+    
+        document.querySelectorAll('p, ul, .hero-description').forEach(element => {
+            element.style.fontSize = '14px'; // Reduce paragraph and list sizes
+        });
+    
+        // Adjust the navigation bar layout for mobile to fit all items
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.textAlign = 'center';
+        navLinks.style.paddingTop = '20px'; // Add some padding to the top for spacing
+        
+        // Adjust each navigation link for mobile
+        document.querySelectorAll('.nav-links li').forEach(li => {
+            li.style.marginBottom = '10px';
+            li.style.marginLeft = '0'; // Reset any left margin
+        });
+    
+        // Reduce the font size of the navbar links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.style.fontSize = '16px';
+        });
+    
+        // Adjust the hero section text size for mobile
+        document.querySelector('.hero-title').style.fontSize = '48px';
+        document.querySelector('.hero-subtitle').style.fontSize = '20px';
+        document.querySelector('.hero-description').style.fontSize = '16px';
+    
+        // Adjust the project grid to display 3 items per row on mobile
+        const projectGrid = document.querySelector('.project-grid');
+        projectGrid.style.gridTemplateColumns = 'repeat(3, 1fr)'; // Force 3 items per row
+    
+        // Adjust the size of project cards to be smaller on mobile
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.style.padding = '10px';
+            card.style.fontSize = '14px'; // Reduce text size in project cards
+        });
+    
+        // Adjust the contact section buttons to be smaller and fit side by side on mobile
+        const contactButtons = document.querySelectorAll('.contact-links .button');
+        contactButtons.forEach(button => {
+            button.style.width = '45%';
+            button.style.padding = '8px 0'; // Reduce padding
+            button.style.margin = '5px'; // Add some margin for spacing
+        });
+    
+        // Reduce the font size of the footer text
+        document.querySelector('footer').style.fontSize = '14px';
+    
+        // Adjust video backgrounds for mobile
+        const videos = document.querySelectorAll('.section-with-video video');
+        videos.forEach(video => {
+            video.style.objectFit = 'cover'; // Make sure the video covers the entire section
+        });
+    
+        // Reduce the size of social icons in the hero section
+        const socialIcons = document.querySelectorAll('.social-icons a');
+        socialIcons.forEach(icon => {
+            icon.style.fontSize = '18px'; // Reduce icon size
+        });
+    
+        // Reduce the scroll indicator size
+        const scrollIndicator = document.querySelector('.scroll-indicator span');
+        scrollIndicator.style.width = '20px';
+        scrollIndicator.style.height = '40px';
+    }
     
     // Smooth scroll for internal links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
