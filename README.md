@@ -91,7 +91,9 @@
     <li><strong>S3</strong> for website hosting.</li>
     <li><strong>Lambda</strong> functions for build, deployment, and notifications.</li>
     <li><strong>CodePipeline</strong> to automate the CI/CD workflow.</li>
+    <li><strong>Route 53</strong> for custom domain configuration.</li>
   </ul>
+  <img src="architecture-diagram.png" alt="Architecture Diagram" style="width:100%; height:auto;">
 </section>
 
 <section id="features">
@@ -107,7 +109,7 @@
   <h2>Technologies Used</h2>
   <ul>
     <li><strong>Languages:</strong> Python</li>
-    <li><strong>AWS Services:</strong> Lambda, S3, DynamoDB, CloudFormation, CodePipeline</li>
+    <li><strong>AWS Services:</strong> Lambda, S3, DynamoDB, Route 53, CloudFormation, CodePipeline</li>
     <li><strong>Framework:</strong> AWS SAM (Serverless Application Model)</li>
   </ul>
 </section>
