@@ -92,7 +92,6 @@
     <li><strong>Lambda</strong> functions for build, deployment, and notifications.</li>
     <li><strong>CodePipeline</strong> to automate the CI/CD workflow.</li>
   </ul>
-  <img src="architecture-diagram.png" alt="Architecture Diagram" style="width:100%; height:auto;">
 </section>
 
 <section id="features">
