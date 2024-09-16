@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resume Website Deployment</title>
 </head>
 <body>
   <header style="background-color: #4CAF50; color: white; padding: 10px 0; text-align: center;">
